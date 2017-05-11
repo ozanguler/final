@@ -1,13 +1,24 @@
+
+
+
 <?php
 session_start();
 include 'dbconnect.php';
 
 
+function condition_goster(){
+  include 'prof_condition.php';
+}
+
+    $gelen1 = $_POST['p'];
+    echo "$gelen1";
+
 function select($day,$start_time) {
   include 'dbconnect.php';
+    $gelen1 = $_POST['p'];
 
 
-  $sql = "SELECT student_eko_id,course_code,room_number FROM student_schedule WHERE day='$day' && start_time='$start_time' && student_eko_id=".$_SESSION['userSession'];
+  $sql = "SELECT prof_eko_id,course_code,room_number FROM prof_schedule WHERE  prof_eko_id='$gelen1' && day='$day' && start_time='$start_time'";
   
   $result = $DBcon->query($sql);
 
@@ -27,13 +38,16 @@ function select($day,$start_time) {
 ?>
 
 <style type="text/css">
-	table, th, td {
+  table, th, td {
     border: 1px solid black;
     height: 50px;
 
     
   }
 </style>
+<!DOCTYPE html>
+<html>
+
 
 <body>
   <table style="width: 75%; position: center">
@@ -49,7 +63,7 @@ function select($day,$start_time) {
       </tr>
     </thead>
 
-    <tbody>	
+    <tbody> 
       <tr>
         <td>09:00-09:50 </td>
         <td id="m-9"> <?php select("monday","9:00") ?> </td>
@@ -135,11 +149,8 @@ function select($day,$start_time) {
   </tbody>
 </table>
 
-<button id="datasil">
-<a href="studentEditSchedule.php">Edit Schedule</a>
-</button>
-<br>
-<button id="nextpage">
-<a href="showUser.php">Search Professor</a>
-</button>
+
+
 </body>
+
+</html>
