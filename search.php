@@ -1,6 +1,3 @@
-
-
-
 <?php
 session_start();
 include 'dbconnect.php';
@@ -37,20 +34,19 @@ function select($day,$start_time) {
 
 ?>
 
-<style type="text/css">
-  table, th, td {
-    border: 1px solid black;
-    height: 50px;
 
-    
-  }
 </style>
 <!DOCTYPE html>
 <html>
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+</head>
 
 <body>
-  <table style="width: 75%; position: center">
+  <table class="striped">
     <thead>
       <tr>
         <th>Day/Time</th>
@@ -142,7 +138,7 @@ function select($day,$start_time) {
       <td id="tu-17"><?php select("tuesday","17:00") ?> </td>
       <td id="w-17"><?php select("wednesday","17:00") ?> </td>
       <td id="th-17"><?php select("thursday","17:00") ?> </td>
-      <td id="fr-17""> <?php select("friday","17:00") ?></td>
+      <td id="fr-17"> <?php select("friday","17:00") ?></td>
 
     </tr>
 
