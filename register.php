@@ -34,37 +34,37 @@ if(isset($_POST['btn-signup'])) {
 
 		if ($DBcon->query($query)) {
 			$msg = "<div class='alert alert-success'>
-						<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Successfully Activated as Professor !
-					</div>";
+			<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Successfully Activated as Professor !
+			</div>";
 		}else {
 			$msg = "<div class='alert alert-danger'>
-						<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Error while activation !
-					</div>";
+			<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Error while activation !
+			</div>";
 		}
 		
 	} else if ($count_student==1) {
 		
-	$query = "INSERT INTO registered_users(first_name,last_name,eko_id,password,role) VALUES('$first_name','$last_name','$eko_id','$hashed_password', 'S')";
+		$query = "INSERT INTO registered_users(first_name,last_name,eko_id,password,role) VALUES('$first_name','$last_name','$eko_id','$hashed_password', 'S')";
 
 		if ($DBcon->query($query)) {
 			$msg = "<div class='alert alert-success'>
-						<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Successfully Activated as Student !
-					</div>";
+			<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Successfully Activated as Student !
+			</div>";
 		}else {
 			$msg = "<div class='alert alert-danger'>
-						<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Error while activation !
-					</div>";
+			<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Error while activation !
+			</div>";
 		}
-			
+
 	}
 
 	else {
 		
 		
 		$msg = "<div class='alert alert-danger'>
-					<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Sorry, there is no match for this eko id in database !
-				</div>";
-			
+		<span class='glyphicon glyphicon-info-sign'></span> &nbsp; Sorry, there is no match for this eko id in database !
+		</div>";
+
 	}
 	
 	$DBcon->close();
@@ -73,60 +73,78 @@ if(isset($_POST['btn-signup'])) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Where is My Professor</title>
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen"> 
-<link rel="stylesheet" href="style.css" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Where is My Professor</title>
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
-<div class="signin-form">
+	<div style="text-align:center"><img src="img/logo.png"></div>
 
-	<div class="container">
-     
-        
-       <form class="form-signin" method="post" id="register-form">
-      
-        <h2 class="form-signin-heading">Activate Your Account</h2><hr />
-        
-        <?php
-		if (isset($msg)) {
-			echo $msg;
-		}
-		?>
-          
-        <div class="form-group">
-        <input type="text" class="form-control" placeholder="Name" name="first_name" required  />
-        </div>
+	<br>
 
-        <div class="form-group">
-        <input type="text" class="form-control" placeholder="Surname" name="last_name" required  />
-        </div>
-        
-        <div class="form-group">
-        <input type="text" class="form-control" placeholder="Eko ID" name="eko_id" required  />
-        </div>
-        
-        <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" name="password" required  />
-        </div>
-        
-     	<hr />
-        
-        <div class="form-group">
-            <button type="submit" class="btn btn-default" name="btn-signup">
-    		<span class="glyphicon glyphicon-log-in"></span> &nbsp; Activate Now
-			</button> 
-            <a href="index.php" class="btn btn-default" style="float:right;">Login Here</a>
-        </div> 
-      
-      </form>
+	<!-- navbar -->
+	<nav>
+		<div style="background-color:#ef7f2d" class="nav-wrapper">
+		</div>
+	</nav>
 
-    </div>
-    
-</div>
+	<div class="signin-form">
+
+		<div class="container">
+
+
+			<form class="form-signin" method="post" id="register-form">
+
+				<h2 style="text-align:center" class="form-signin-heading">Activate Your Account</h2><hr />
+
+				<?php
+				if (isset($msg)) {
+					echo $msg;
+				}
+				?>
+
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Name" name="first_name" required  />
+				</div>
+
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Surname" name="last_name" required  />
+				</div>
+
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Eko ID" name="eko_id" required  />
+				</div>
+
+				<div class="form-group">
+					<input type="password" class="form-control" placeholder="Password" name="password" required  />
+				</div>
+
+				<hr />
+
+				<div class="form-group">
+					<table>
+						<tr>
+							<td style="text-align:left">
+								<button style="background-color:#ef7f2d" type="submit" class="btn btn-default" name="btn-signup">
+									<span class="glyphicon glyphicon-log-in"></span> &nbsp; Activate Now
+								</button> 
+							</td>
+							<td style="text-align:right">
+								<a style="background-color:#ef7f2d" href="index.php" class="btn btn-default" style="float:right;">Login Here</a>
+							</td>
+						</tr>
+					</table>
+				</div> 
+
+			</form>
+
+		</div>
+
+	</div>
 
 </body>
 </html>
