@@ -26,7 +26,7 @@ $DBcon->close();
 <body>
 
 
-  <img src="./img/logo.png" style="text-align:center">
+  
 
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">

@@ -272,6 +272,7 @@ $userRow=$query->fetch_array();
     </tbody>
   </table>
 </center>
+
 <a href="profhome2.php"><input type="submit" value="GÖNDER" id="gonder"/></a>
 
 <div style="display: none;" id="sonuc"></div>

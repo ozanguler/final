@@ -29,19 +29,34 @@ function select($day,$start_time) {
   }
 }
 
+$query = $DBcon->query("SELECT * FROM registered_users WHERE eko_id=".$_SESSION['userSession']);
+$userRow=$query->fetch_array();
+$DBcon->close();
+
 ?>
 
-<style type="text/css">
-	table, th, td {
-    border: 1px solid black;
-    height: 50px;
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
 
-    
-  }
-</style>
 
 <body>
-  <table style="width: 75%; position: center">
+
+  <!-- Nav Bar -->
+  <nav>
+    <div style="background-color:#ef7f2d" class="nav-wrapper">
+      <a class="brand-logo"><img height="100%" src="img/navbarlogo.png"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a>&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
+        <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Schedule -->
+  <table style="position: center" class="striped">
     <thead>
       <tr>
         <th>Day/Time</th>
@@ -133,16 +148,17 @@ function select($day,$start_time) {
       <td id="tu-17"><?php select("tuesday","17:00") ?> </td>
       <td id="w-17"><?php select("wednesday","17:00") ?> </td>
       <td id="th-17"><?php select("thursday","17:00") ?> </td>
-      <td id="fr-17""> <?php select("friday","17:00") ?></td>
+      <td id="fr-17"> <?php select("friday","17:00") ?></td>
 
     </tr>
 
   </tbody>
 </table>
 
-<button id="datasil">
-<a href="profEditSchedule.php">Edit Schedule</a>
-</button>
+
+<div style="text-align:center">
+<a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="datasil" href="profEditSchedule.php">Edit Schedule</a>
+</div>
 
 <?php
 condition_goster();
