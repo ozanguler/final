@@ -25,7 +25,7 @@ $DBcon->close();
     <div style="background-color:#ef7f2d" class="nav-wrapper">
       <a class="brand-logo"><img height="100%" src="img/navbarlogo.png"></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a>&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
+        <li><a href="studenthome2.php">&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
         <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
       </ul>
     </div>
@@ -74,6 +74,7 @@ $DBcon->close();
 
   }); 
   </script>
+
 </body>
 
 </html>

@@ -1,18 +1,18 @@
 <?php
 session_start();
 include_once 'dbconnect.php';
-  
-  $deletesql = "DELETE FROM student_schedule WHERE student_eko_id=".$_SESSION['userSession'];
 
-  if ($DBcon->query($deletesql) === TRUE) {
-    echo "Record deleted successfully";
-  } else {
-    echo "Error deleting record: " . $DBcon->error;
-  }
+$deletesql = "DELETE FROM student_schedule WHERE student_eko_id=".$_SESSION['userSession'];
 
-  
+if ($DBcon->query($deletesql) === TRUE) {
+    // echo "Record deleted successfully";
+} else {
+  echo "Error deleting record: " . $DBcon->error;
+}
+
+
 if (!isset($_SESSION['userSession'])) {
-	header("Location: index.php");
+  header("Location: index.php");
 }
 
 $query = $DBcon->query("SELECT * FROM registered_users WHERE eko_id=".$_SESSION['userSession']);
@@ -25,64 +25,9 @@ $userRow=$query->fetch_array();
   <script src="http://code.jquery.com/jquery.js"></script>  
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Welcome - <?php echo $userRow['first_name']; ?></title>
-  <style>
-    table, th, td {
-
-      border: 1px solid black;
-      height: 50px;
-    }
-    button{
-      height: 70px;
-      width: 150px;
-    }
-
-    /* The Modal (background) */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
-
-    /* Modal Content */
-    .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-    }
-    /* The Close Button */
-    .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .gönder:hover {
-      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    }
-
-  </style>
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> 
-  <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen"> 
-
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 
 <!-- The Modal -->
@@ -94,186 +39,180 @@ $userRow=$query->fetch_array();
 
     <div id="lecturepanel">
 
-     <?php 
-     $lectures = "SELECT course_code, course_name FROM courses";
-     $result = $DBcon->query($lectures);
+      <?php 
+      $lectures = "SELECT course_code, course_name FROM courses";
+      $result = $DBcon->query($lectures);
 
-     $rooms = "SELECT room_name FROM room_number";
-     $result1 = $DBcon->query($rooms);
-     ?>         
+      $rooms = "SELECT room_name FROM room_number";
+      $result1 = $DBcon->query($rooms);
+      ?>         
 
-     <label><b>Ders Kodu</b></label>
+      <div class="input-field col s12">
 
-     <select id="Derskodu"  type="text" placeholder="Ders Kodu" name="Derskodu">
-      <?php
-      while($row = $result->fetch_assoc()) 
-      {
-        ?>
-        <option value="<?php echo $row['course_code']; ?>"><?php echo $row['course_code']; ?></option>
-        <?php
-      }
-      ?>
-    </select>
+        <label><b>Ders Kodu</b></label>
+        <br>
+        <select class="browser-default" id="Derskodu"  type="text" placeholder="Ders Kodu" name="Derskodu">
+          <option value="" disabled selected>Choose your option</option>
+          <?php
+          while($row = $result->fetch_assoc()) 
+          {
+            ?>
+            <option value="<?php echo $row['course_code']; ?>"><?php echo $row['course_code']; ?></option>
+            <?php
+          }
+          ?>
+        </select>
+        
+      </div>
 
-    <br>
+      <div class="input-field col s12">
+        <label><b>Ders Sınıfı</b></label>
+        <br>
+        <select class="browser-default" id="Derssınıfı" type="text" placeholder="Ders Sınıfı" name="Derssınıfı">
+          <option value="" disabled selected>Choose your option</option>
+          <?php
+          while($row = $result1->fetch_assoc()) 
+          {
+            ?>
+            <option value="<?php echo $row['room_name']; ?>"><?php echo $row['room_name']; ?></option>
+            <?php
+          }
+          ?>
+        </select>
+        
+      </div>
+      <br>
 
-    <label><b>Ders Sınıfı</b></label>
-    <select id="Derssınıfı" type="text" placeholder="Ders Sınıfı" name="Derssınıfı">
-      <?php
-      while($row = $result1->fetch_assoc()) 
-      {
-        ?>
-        <option value="<?php echo $row['room_name']; ?>"><?php echo $row['room_name']; ?></option>
-        <?php
-      }
-      ?>
-    </select>
-    <br>
 
+    </div>
+    <button id="modalkyt" onclick="kaydet()" style="height: 40px">kaydet</button>
 
   </div>
-  <button id="modalkyt" onclick="kaydet()" style="height: 40px">kaydet</button>
-
-</div>
 
 </div>
 
 
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="http://www.codingcage.com">Coding Cage</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="http://www.codingcage.com/2015/03/simple-login-and-signup-system-with-php.html">Back to Article</a></li>
-          <li><a href="http://www.codingcage.com/search/label/jQuery">jQuery</a></li>
-          <li><a href="http://www.codingcage.com/search/label/PHP">PHP</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp; <?php echo $userRow['first_name']; ?></a></li>
-          <li><a href="logout.php?logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp; Logout</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
+  <!-- Nav Bar -->
+  <nav>
+    <div style="background-color:#ef7f2d" class="nav-wrapper">
+      <a class="brand-logo"><img height="64" src="img/navbarlogo.png"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="profhome2.php">&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
+        <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
+      </ul>
     </div>
   </nav>
-
-  <div class="container" style="margin-top:150px;text-align:center;font-family:Verdana, Geneva, sans-serif;font-size:35px;">
-    <a href="http://www.codingcage.com/">Coding Cage - Programming Blog</a><br /><br />
-    <p>STUDENT HOME PAGE</p>
-  </div>
-  <center>
-    <table style="width: 75%;">
-      <thead>
-        <tr>
-          <th>Day/Time</th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday </th>
-          <th>Thursday</th>
-          <th>Friday</th>
-
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>09:00-09:50 </td>
-          <td id="m-9", onclick="myFunction('m-9')"> </td>
-          <td id="tu-9", onclick="myFunction('tu-9')"> </td>
-          <td id="w-9", onclick="myFunction('w-9')"> </td>
-          <td id="th-9", onclick="myFunction('th-9')"> </td>
-          <td id="fr-9", onclick="myFunction('fr-9')"> </td>
-
-        </tr>
-        <tr>
-          <td>10:00-10:50 </td>
-          <td id="m-10", onclick="myFunction('m-10')"> </td>
-          <td id="tu-10", onclick="myFunction('tu-10')"> </td>
-          <td id="w-10", onclick="myFunction('w-10')"> </td>
-          <td id="th-10", onclick="myFunction('th-10')"> </td>
-          <td id="fr-10", onclick="myFunction('fr-10')"> </td>
-
-        </tr>
-        <tr>
-          <td>11:00-11:50</td>
-          <td id="m-11", onclick="myFunction('m-11')"> </td>
-          <td id="tu-11", onclick="myFunction('tu-11')"> </td>
-          <td id="w-11", onclick="myFunction('w-11')"> </td>
-          <td id="th-11", onclick="myFunction('th-11')"> </td>
-          <td id="fr-11", onclick="myFunction('fr-11')"> </td>
-
-        </tr>
-        <tr>
-          <td>12:00-12:50 </td>
-          <td id="m-12", onclick="myFunction('m-12')"> </td>
-          <td id="tu-12", onclick="myFunction('tu-12')"> </td>
-          <td id="w-12", onclick="myFunction('w-12')"> </td>
-          <td id="th-12", onclick="myFunction('th-12')"> </td>
-          <td id="fr-12", onclick="myFunction('fr-12')"> </td>
-
-        </tr>
-        <tr>
-          <td>13:00-13:50 </td>
-          <td id="m-13", onclick="myFunction('m-13')"> </td>
-          <td id="tu-13", onclick="myFunction('tu-13')"> </td>
-          <td id="w-13", onclick="myFunction('w-13')"> </td>
-          <td id="th-13", onclick="myFunction('th-13')"> </td>
-          <td id="fr-13", onclick="myFunction('fr-13')"> </td>
-
-        </tr>
-        <tr>
-          <td>14:00-14:50 </td>
-          <td id="m-14", onclick="myFunction('m-14')"> </td>
-          <td id="tu-14", onclick="myFunction('tu-14')"> </td>
-          <td id="w-14", onclick="myFunction('w-14')"> </td>
-          <td id="th-14", onclick="myFunction('th-14')"> </td>
-          <td id="fr-14", onclick="myFunction('fr-14')"> </td>
-
-        </tr>
-        <tr>
-          <td>15:00-15:50</td>
-          <td id="m-15", onclick="myFunction('m-15')"> </td>
-          <td id="tu-15", onclick="myFunction('tu-15')"> </td>
-          <td id="w-15", onclick="myFunction('w-15')"> </td>
-          <td id="th-15", onclick="myFunction('th-15')"> </td>
-          <td id="fr-15", onclick="myFunction('fr-15')"> </td>
-
-        </tr>
-        <tr>
-         <td>16:00-16:50</td>
-         <td id="m-16", onclick="myFunction('m-16')"> </td>
-         <td id="tu-16", onclick="myFunction('tu-16')"> </td>
-         <td id="w-16", onclick="myFunction('w-16')"> </td>
-         <td id="th-16", onclick="myFunction('th-16')"> </td>
-         <td id="fr-16", onclick="myFunction('fr-16')"> </td>
-
-       </tr>
-       <tr>
-        <td>17:00-17:50</td>
-        <td id="m-17",  onclick="myFunction('m-17')"> </td>
-        <td id="tu-17", onclick="myFunction('tu-17')"> </td>
-        <td id="w-17", onclick="myFunction('w-17')"> </td>
-        <td id="th-17", onclick="myFunction('th-17')"> </td>
-        <td id="fr-17", onclick="myFunction('fr-17')"> </td>
+  <br>
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Day/Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday </th>
+        <th>Thursday</th>
+        <th>Friday</th>
 
       </tr>
-    </tbody>
-  </table>
-</center>
-<a href="studenthome2.php"><input type="submit" value="GÖNDER" id="gonder"/></a>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>09:00-09:50 </td>
+        <td id="m-9", onclick="myFunction('m-9')"> </td>
+        <td id="tu-9", onclick="myFunction('tu-9')"> </td>
+        <td id="w-9", onclick="myFunction('w-9')"> </td>
+        <td id="th-9", onclick="myFunction('th-9')"> </td>
+        <td id="fr-9", onclick="myFunction('fr-9')"> </td>
+
+      </tr>
+      <tr>
+        <td>10:00-10:50 </td>
+        <td id="m-10", onclick="myFunction('m-10')"> </td>
+        <td id="tu-10", onclick="myFunction('tu-10')"> </td>
+        <td id="w-10", onclick="myFunction('w-10')"> </td>
+        <td id="th-10", onclick="myFunction('th-10')"> </td>
+        <td id="fr-10", onclick="myFunction('fr-10')"> </td>
+
+      </tr>
+      <tr>
+        <td>11:00-11:50</td>
+        <td id="m-11", onclick="myFunction('m-11')"> </td>
+        <td id="tu-11", onclick="myFunction('tu-11')"> </td>
+        <td id="w-11", onclick="myFunction('w-11')"> </td>
+        <td id="th-11", onclick="myFunction('th-11')"> </td>
+        <td id="fr-11", onclick="myFunction('fr-11')"> </td>
+
+      </tr>
+      <tr>
+        <td>12:00-12:50 </td>
+        <td id="m-12", onclick="myFunction('m-12')"> </td>
+        <td id="tu-12", onclick="myFunction('tu-12')"> </td>
+        <td id="w-12", onclick="myFunction('w-12')"> </td>
+        <td id="th-12", onclick="myFunction('th-12')"> </td>
+        <td id="fr-12", onclick="myFunction('fr-12')"> </td>
+
+      </tr>
+      <tr>
+        <td>13:00-13:50 </td>
+        <td id="m-13", onclick="myFunction('m-13')"> </td>
+        <td id="tu-13", onclick="myFunction('tu-13')"> </td>
+        <td id="w-13", onclick="myFunction('w-13')"> </td>
+        <td id="th-13", onclick="myFunction('th-13')"> </td>
+        <td id="fr-13", onclick="myFunction('fr-13')"> </td>
+
+      </tr>
+      <tr>
+        <td>14:00-14:50 </td>
+        <td id="m-14", onclick="myFunction('m-14')"> </td>
+        <td id="tu-14", onclick="myFunction('tu-14')"> </td>
+        <td id="w-14", onclick="myFunction('w-14')"> </td>
+        <td id="th-14", onclick="myFunction('th-14')"> </td>
+        <td id="fr-14", onclick="myFunction('fr-14')"> </td>
+
+      </tr>
+      <tr>
+        <td>15:00-15:50</td>
+        <td id="m-15", onclick="myFunction('m-15')"> </td>
+        <td id="tu-15", onclick="myFunction('tu-15')"> </td>
+        <td id="w-15", onclick="myFunction('w-15')"> </td>
+        <td id="th-15", onclick="myFunction('th-15')"> </td>
+        <td id="fr-15", onclick="myFunction('fr-15')"> </td>
+
+      </tr>
+      <tr>
+       <td>16:00-16:50</td>
+       <td id="m-16", onclick="myFunction('m-16')"> </td>
+       <td id="tu-16", onclick="myFunction('tu-16')"> </td>
+       <td id="w-16", onclick="myFunction('w-16')"> </td>
+       <td id="th-16", onclick="myFunction('th-16')"> </td>
+       <td id="fr-16", onclick="myFunction('fr-16')"> </td>
+
+     </tr>
+     <tr>
+      <td>17:00-17:50</td>
+      <td id="m-17",  onclick="myFunction('m-17')"> </td>
+      <td id="tu-17", onclick="myFunction('tu-17')"> </td>
+      <td id="w-17", onclick="myFunction('w-17')"> </td>
+      <td id="th-17", onclick="myFunction('th-17')"> </td>
+      <td id="fr-17", onclick="myFunction('fr-17')"> </td>
+
+    </tr>
+  </tbody>
+</table>
+<table>
+  <tr>
+    <td style="text-align:center">
+      <a style="background-color:#ef7f2d; text-aling:center" class="waves-effect waves-light btn" id="gonder" href="studenthome2.php">Gönder</a>
+    </td>
+  </tr>
+</table>
 
 <div style="display: none;" id="sonuc"></div>
 <script>
- function myFunction(x) {
+function myFunction(x) {
           // Get the modal
           var modal = document.getElementById('myModal');
 
@@ -304,18 +243,18 @@ window.onclick = function(event) {
 }
 
 lecturepanel.style.display="block";
-    modalkyt.onclick=function(){
+modalkyt.onclick=function(){
 
 
 
   //var modal = document.getElementById('myModal');
-   var derskodu =document.getElementById('Derskodu').value;
-    var derssınıfı = document.getElementById('Derssınıfı').value;
+  var derskodu =document.getElementById('Derskodu').value;
+  var derssınıfı = document.getElementById('Derssınıfı').value;
 
-    document.getElementById(x).value =derskodu+'!'+derssınıfı;
-    document.getElementById(x).innerHTML =derskodu+"<br>"+derssınıfı;
-    
-    modal.style.display = "none";
+  document.getElementById(x).value =derskodu+'!'+derssınıfı;
+  document.getElementById(x).innerHTML =derskodu+"<br>"+derssınıfı;
+
+  modal.style.display = "none";
 }
 }
 $('#gonder').click(function(){ 
