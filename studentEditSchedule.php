@@ -85,7 +85,14 @@ $userRow=$query->fetch_array();
 
 
     </div>
-    <button id="modalkyt" onclick="kaydet()" style="height: 40px">kaydet</button>
+    
+    <table>
+      <tr>
+        <td style="text-align:center">
+          <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="modalkyt" onClick="kaydet()">Kaydet</a>
+        </td>
+      </tr>
+    </table>
 
   </div>
 
