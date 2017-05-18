@@ -52,72 +52,62 @@ if (isset($_POST['btn-login'])) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Where is My Professor - Login & Activation System</title>
-	
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	
+	<link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/></head>
+	<body>
 
-</head>
-<body>
+		<div style="text-align:center"><img src="img/logo.png"></div>
 
-	<div style="text-align:center"><img src="img/logo.png"></div>
+		<br>
 
-	<br>
+		<!-- navbar -->
+		<nav>
+			<div style="background-color:#ef7f2d" class="nav-wrapper">
+			</div>
+		</nav>
 
-	<!-- navbar -->
-	<nav>
-		<div style="background-color:#ef7f2d" class="nav-wrapper">
-		</div>
-	</nav>
+		<div class="signin-form">
 
-	<div class="signin-form">
-
-		<div class="container">
+			<div class="container">
 
 
-			<form class="form-signin" method="post" id="login-form">
+				<form class="form-signin" method="post" id="login-form">
 
-				<h2 style="text-align:center" class="form-signin-heading">Login</h2><hr />
+					<h2 style="text-align:center" class="form-signin-heading">Login</h2><hr />
 
-				<?php
-				if(isset($msg)){
-					echo $msg;
-				}
-				?>
+					<?php
+					if(isset($msg)){
+						echo $msg;
+					}
+					?>
 
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Eko ID" name="eko_id" required />
-				</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Eko ID" name="eko_id" required />
+					</div>
 
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Password" name="password" required />
-				</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="Password" name="password" required />
+					</div>
 
-				<hr />
+					<hr />
 
-				<div class="form-group">
-					<table>
-						<tr>
-							<td style="text-align:left">
-								<button style="background-color:#ef7f2d" type="submit" class="btn btn-default" name="btn-login" id="btn-login">
-									<span class="glyphicon glyphicon-log-in"></span> &nbsp; Login
-								</button> 
-							</td>
-							<td style="text-align:right">
-								<a style="background-color:#ef7f2d" href="register.php" class="btn btn-default" style="float:right;">Activate Here</a>
-							</td>
-						</tr>
-					</table>
-				</div>  
+					<div class="form-group">
+						<button type="submit" class="btn btn-default" name="btn-login" id="btn-login">
+							<span class="glyphicon glyphicon-log-in"></span> &nbsp; Login
+						</button> 
+
+						<a href="register.php" class="btn btn-default" style="float:right;">Activate Here</a>
+
+					</div>  
 
 
 
-			</form>
+				</form>
+
+			</div>
 
 		</div>
 
-	</div>
-
-</body>
-</html>
+	</body>
+	</html>

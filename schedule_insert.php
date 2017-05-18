@@ -1,6 +1,6 @@
 <html>
  <head>
-  <title></title>
+  <title>PHP Denemesi</title>
  </head>
  <body>
  <?php 
@@ -11,9 +11,9 @@ include "dbconnect.php";
 $eko_id=$_SESSION['userSession'];
 
 
-    $gelen1 = $_POST['m-9'];
-    $gelen2= $_POST['m-10'];
-    $gelen3=  $_POST['m-11'];
+  	$gelen1 = $_POST['m-9'];
+  	$gelen2= $_POST['m-10'];
+  	$gelen3=  $_POST['m-11'];
     $gelen4=  $_POST['m-12'];
     $gelen5=  $_POST['m-13'];
     $gelen6=  $_POST['m-14'];
@@ -56,7 +56,7 @@ $eko_id=$_SESSION['userSession'];
     $gelen43=  $_POST['fr-15'];
     $gelen44=  $_POST['fr-16'];
     $gelen45=  $_POST['fr-17'];
-    
+  	
 
 $m9=explode('!',$gelen1);
 $m10=explode('!',$gelen2);
@@ -104,10 +104,10 @@ $fr15=explode('!',$gelen43);
 $fr16=explode('!',$gelen44);
 $fr17=explode('!',$gelen45);
 
-$sql = "INSERT INTO student_schedule(student_eko_id,course_code,room_number,start_time,end_time,day)
+$sql = "INSERT INTO prof_schedule(prof_eko_id,course_code,room_number,start_time,end_time,day)
 VALUES ('$eko_id', '$m9[0]', '$m9[1]', '9:00','9:50','monday'),
-        ('$eko_id', '$m10[0]', '$m10[1]', '10:00','10:50','monday'),
-        ('$eko_id', '$m11[0]', '$m11[1]', '11:00','11:50','monday'),
+        ('$eko_id', '$m10[0]', '$m10[1]', '10:00','11:50','monday'),
+        ('$eko_id', '$m11[0]', '$m11[1]', '11:00','12:50','monday'),
         ('$eko_id', '$m12[0]', '$m12[1]', '12:00','12:50','monday'),
         ('$eko_id', '$m13[0]', '$m13[1]', '13:00','13:50','monday'),
         ('$eko_id', '$m14[0]', '$m14[1]', '14:00','14:50','monday'),
@@ -116,8 +116,8 @@ VALUES ('$eko_id', '$m9[0]', '$m9[1]', '9:00','9:50','monday'),
         ('$eko_id', '$m17[0]', '$m17[1]', '17:00','17:50','monday'),
 
         ('$eko_id', '$tu9[0]', '$tu9[1]', '9:00','9:50','tuesday'),
-        ('$eko_id', '$tu10[0]', '$tu10[1]', '10:00','10:50','tuesday'),
-        ('$eko_id', '$tu11[0]', '$tu11[1]', '11:00','11:50','tuesday'),
+        ('$eko_id', '$tu10[0]', '$tu10[1]', '10:00','11:50','tuesday'),
+        ('$eko_id', '$tu11[0]', '$tu11[1]', '11:00','12:50','tuesday'),
         ('$eko_id', '$tu12[0]', '$tu12[1]', '12:00','12:50','tuesday'),
         ('$eko_id', '$tu13[0]', '$tu13[1]', '13:00','13:50','tuesday'),
         ('$eko_id', '$tu14[0]', '$tu14[1]', '14:00','14:50','tuesday'),
@@ -126,8 +126,8 @@ VALUES ('$eko_id', '$m9[0]', '$m9[1]', '9:00','9:50','monday'),
         ('$eko_id', '$tu17[0]', '$tu17[1]', '17:00','17:50','tuesday'),
 
         ('$eko_id', '$w9[0]', '$w9[1]', '9:00','9:50','wednesday'),
-        ('$eko_id', '$w10[0]', '$w10[1]', '10:00','10:50','wednesday'),
-        ('$eko_id', '$w11[0]', '$w11[1]', '11:00','11:50','wednesday'),
+        ('$eko_id', '$w10[0]', '$w10[1]', '10:00','11:50','wednesday'),
+        ('$eko_id', '$w11[0]', '$w11[1]', '11:00','12:50','wednesday'),
         ('$eko_id', '$w12[0]', '$w12[1]', '12:00','12:50','wednesday'),
         ('$eko_id', '$w13[0]', '$w13[1]', '13:00','13:50','wednesday'),
         ('$eko_id', '$w14[0]', '$w14[1]', '14:00','14:50','wednesday'),
@@ -136,8 +136,8 @@ VALUES ('$eko_id', '$m9[0]', '$m9[1]', '9:00','9:50','monday'),
         ('$eko_id', '$w17[0]', '$w17[1]', '17:00','17:50','wednesday'),
 
         ('$eko_id', '$th9[0]', '$th9[1]', '9:00','9:50','thursday'),
-        ('$eko_id', '$th10[0]', '$th10[1]', '10:00','10:50','thursday'),
-        ('$eko_id', '$th11[0]', '$th11[1]', '11:00','11:50','thursday'),
+        ('$eko_id', '$th10[0]', '$th10[1]', '10:00','11:50','thursday'),
+        ('$eko_id', '$th11[0]', '$th11[1]', '11:00','12:50','thursday'),
         ('$eko_id', '$th12[0]', '$th12[1]', '12:00','12:50','thursday'),
         ('$eko_id', '$th13[0]', '$th13[1]', '13:00','13:50','thursday'),
         ('$eko_id', '$th14[0]', '$th14[1]', '14:00','14:50','thursday'),
@@ -146,8 +146,8 @@ VALUES ('$eko_id', '$m9[0]', '$m9[1]', '9:00','9:50','monday'),
         ('$eko_id', '$th17[0]', '$th17[1]', '17:00','17:50','thursday'),
 
         ('$eko_id', '$fr9[0]', '$fr9[1]', '9:00','9:50','friday'),
-        ('$eko_id', '$tr10[0]', '$fr10[1]', '10:00','10:50','friday'),
-        ('$eko_id', '$fr11[0]', '$fr11[1]', '11:00','11:50','friday'),
+        ('$eko_id', '$tr10[0]', '$fr10[1]', '10:00','11:50','friday'),
+        ('$eko_id', '$fr11[0]', '$fr11[1]', '11:00','12:50','friday'),
         ('$eko_id', '$fr12[0]', '$fr12[1]', '12:00','12:50','friday'),
         ('$eko_id', '$fr13[0]', '$fr13[1]', '13:00','13:50','friday'),
         ('$eko_id', '$fr14[0]', '$fr14[1]', '14:00','14:50','friday'),

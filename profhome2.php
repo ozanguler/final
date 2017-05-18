@@ -34,8 +34,10 @@ $userRow=$query->fetch_array();
 $DBcon->close();
 
 ?>
-
+<!DOCTYPE html>
+<html>
 <head>
+  <title></title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -47,16 +49,16 @@ $DBcon->close();
   <!-- Nav Bar -->
   <nav>
     <div style="background-color:#ef7f2d" class="nav-wrapper">
-      <a class="brand-logo"><img height="100%" src="img/navbarlogo.png"></a>
+      <a class="brand-logo"><img height="66" src="img/navbarlogo.png"></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="profhome2.php">&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
+        <li><a>&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
         <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Schedule -->
-  <table style="position: center" class="striped">
+  <br>
+  <table class="striped">
     <thead>
       <tr>
         <th>Day/Time</th>
@@ -154,13 +156,21 @@ $DBcon->close();
 
   </tbody>
 </table>
+<table>
+  <tr>
+    <td style="text-align:center">
+      <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="datasil" href="profEditSchedule.php">Edit Schedule</a>
+      <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="seeAppointments" href="showProfAppointments.php">Show Appointments</a>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:center">
+      <?php
+      condition_goster();
+      ?>
+    </td>
+  </tr>
+</table>
 
-
-<div style="text-align:center">
-<a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="datasil" href="profEditSchedule.php">Edit Schedule</a>
-</div>
-
-<?php
-condition_goster();
-?>
 </body>
+</html>

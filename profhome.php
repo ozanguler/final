@@ -306,15 +306,12 @@ window.onclick = function(event) {
     lecturepanel.style.display="none";
     modalkyt.onclick=function(){
 
-
-
   //var modal = document.getElementById('myModal');
    //var derskodu =document.getElementById('Derskodu').value;
-   // var derssınıfı = document.getElementById('Derssınıfı').value;
-   var room_no="A 100";
+   // var derssınıfı = document.getElementById('Derssınıfı').value;  
 
-    document.getElementById(x).value ="office hour!"+room_no;
-    document.getElementById(x).innerHTML ="office hour"+"<br>"+room_no;
+    document.getElementById(x).value ="office hour!";
+    document.getElementById(x).innerHTML ="Office Hour";
     
     modal.style.display = "none";
 }

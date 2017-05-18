@@ -17,7 +17,8 @@
 </head>
 
 <body>
-  <table>
+
+<table>
     <tr>
       <td>
         <div class="container" style="text-align:center;font-family:Verdana, Geneva, sans-serif;font-size:35px;">
@@ -42,32 +43,48 @@
       </td>
     </tr>
   </table>
-<!--
-  <button id="busy" >Busy</button>
-  <button id="Available">Available</button>
-  <button id="Inclass" >Inclass</button>
-  <button id="Meeting" >Meeting</button>
--->
-<div id="sonuc"></div>
+
+
+  <div id="sonuc"></div>
 
 
 
 
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
 
 
 
-$('#busy').click(function(){ 
+  $('#busy').click(function(){ 
 
 
-  document.getElementById("situation").innerHTML="Busy";
-  document.getElementById("situationpanel").style.backgroundColor="#f44336";
-  document.getElementById("situation").value="Busy";
+    document.getElementById("situation").innerHTML="Busy";
+    document.getElementById("situationpanel").style.backgroundColor="#f44336";
+    document.getElementById("situation").value="Busy";
 
-  var post_edilecek_veriler = 'situation='+$('#situation').val();
-  $.ajax({ 
+    var post_edilecek_veriler = 'situation='+$('#situation').val();
+    $.ajax({ 
+      type:'POST',  
+      url:'condition_update.php',  
+      data:post_edilecek_veriler, 
+      success: 
+      function(cevap){ 
+       $("#sonuc").html(cevap); 
+     } 
+   }); 
+
+
+  }); 
+  $('#Available').click(function(){ 
+
+
+   document.getElementById("situation").innerHTML="Available";
+   document.getElementById("situationpanel").style.backgroundColor="#4caf50";
+   document.getElementById("situation").value="Available";
+
+   var post_edilecek_veriler = 'situation='+$('#situation').val();
+   $.ajax({ 
     type:'POST',  
     url:'condition_update.php',  
     data:post_edilecek_veriler, 
@@ -78,71 +95,51 @@ $('#busy').click(function(){
  }); 
 
 
-}); 
-$('#Available').click(function(){ 
+ }); 
+  $('#Inclass').click(function(){ 
 
 
- document.getElementById("situation").innerHTML="Available";
- document.getElementById("situationpanel").style.backgroundColor="#4caf50";
- document.getElementById("situation").value="Available";
-
- var post_edilecek_veriler = 'situation='+$('#situation').val();
- $.ajax({ 
-  type:'POST',  
-  url:'condition_update.php',  
-  data:post_edilecek_veriler, 
-  success: 
-  function(cevap){ 
-   $("#sonuc").html(cevap); 
- } 
-}); 
+   document.getElementById("situation").innerHTML="Inclass";
+   document.getElementById("situationpanel").style.backgroundColor="#2196f3";
+   document.getElementById("situation").value="Inclass";
 
 
-}); 
-$('#Inclass').click(function(){ 
+   var post_edilecek_veriler = 'situation='+$('#situation').val();
+   $.ajax({ 
+    type:'POST',  
+    url:'condition_update.php',  
+    data:post_edilecek_veriler, 
+    success: 
+    function(cevap){ 
+     $("#sonuc").html(cevap); 
+   } 
+ }); 
 
 
- document.getElementById("situation").innerHTML="Inclass";
- document.getElementById("situationpanel").style.backgroundColor="#2196f3";
- document.getElementById("situation").value="Inclass";
+ }); 
+  $('#Meeting').click(function(){ 
 
 
- var post_edilecek_veriler = 'situation='+$('#situation').val();
- $.ajax({ 
-  type:'POST',  
-  url:'condition_update.php',  
-  data:post_edilecek_veriler, 
-  success: 
-  function(cevap){ 
-   $("#sonuc").html(cevap); 
- } 
-}); 
+   document.getElementById("situation").innerHTML="Meeting"; 
+   document.getElementById("situationpanel").style.backgroundColor="#fdd835 ";
+   document.getElementById("situation").value="Meeting";
+
+   var post_edilecek_veriler = 'situation='+$('#situation').val();
+   $.ajax({ 
+    type:'POST',  
+    url:'condition_update.php',  
+    data:post_edilecek_veriler, 
+    success: 
+    function(cevap){ 
+     $("#sonuc").html(cevap); 
+   } 
+ }); 
 
 
-}); 
-$('#Meeting').click(function(){ 
+ }); 
 
-
- document.getElementById("situation").innerHTML="Meeting"; 
- document.getElementById("situationpanel").style.backgroundColor="#fdd835 ";
- document.getElementById("situation").value="Meeting";
-
- var post_edilecek_veriler = 'situation='+$('#situation').val();
- $.ajax({ 
-  type:'POST',  
-  url:'condition_update.php',  
-  data:post_edilecek_veriler, 
-  success: 
-  function(cevap){ 
-   $("#sonuc").html(cevap); 
- } 
-}); 
-
-
-}); 
-
-</script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+  </script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
 </html>

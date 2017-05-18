@@ -2,7 +2,6 @@
 session_start();
 include 'dbconnect.php';
 
-
 function select($day,$start_time) {
   include 'dbconnect.php';
 
@@ -20,7 +19,7 @@ function select($day,$start_time) {
     }
   } 
   else {
-    echo "0 results";
+    echo "Edit your schedule";
   }
 }
 
@@ -30,29 +29,31 @@ $DBcon->close();
 
 ?>
 
+<!DOCTYPE html>
+<html>
 <head>
+  <title></title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
 
+<!-- Nav Bar -->
+<nav>
+  <div style="background-color:#ef7f2d" class="nav-wrapper">
+    <a class="brand-logo"><img height="66" src="img/navbarlogo.png"></a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a>&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
+      <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+
 <body>
-
-  <!-- Nav Bar -->
-  <nav>
-    <div style="background-color:#ef7f2d" class="nav-wrapper">
-      <a class="brand-logo"><img height="100%" src="img/navbarlogo.png"></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a>&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
-        <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <br>
-
-  <!-- Students Schedule -->
-  <table style="position: center" class="striped">
+  <table class="striped">
     <thead>
       <tr>
         <th>Day/Time</th>
@@ -150,15 +151,18 @@ $DBcon->close();
 
   </tbody>
 </table>
+
 <!-- butons -->
 <table>
   <tr>
     <td style="text-align:center">
       <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="datasil" href="studentEditSchedule.php">Edit Schedule</a>
-    
       <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="nextpage" href="showUser.php">Search Professor</a>
+      <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="seeAppointments" href="showStudentAppointments.php">Show Appointments</a>
     </td>
   </tr>
 </table>
 
+
 </body>
+</html>

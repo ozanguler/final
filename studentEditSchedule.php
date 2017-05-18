@@ -5,14 +5,14 @@ include_once 'dbconnect.php';
 $deletesql = "DELETE FROM student_schedule WHERE student_eko_id=".$_SESSION['userSession'];
 
 if ($DBcon->query($deletesql) === TRUE) {
-    // echo "Record deleted successfully";
+  echo "Record deleted successfully";
 } else {
   echo "Error deleting record: " . $DBcon->error;
 }
 
 
 if (!isset($_SESSION['userSession'])) {
-  header("Location: index.php");
+	header("Location: index.php");
 }
 
 $query = $DBcon->query("SELECT * FROM registered_users WHERE eko_id=".$_SESSION['userSession']);
@@ -35,9 +35,12 @@ $userRow=$query->fetch_array();
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close">&times;</span>
+    
 
-    <div id="lecturepanel">
+
+    <div id="lecturepanel" style="padding-top: 60px;">
+      <span class="close">&times;</span>
+      <br>
 
       <?php 
       $lectures = "SELECT course_code, course_name FROM courses";
@@ -47,52 +50,41 @@ $userRow=$query->fetch_array();
       $result1 = $DBcon->query($rooms);
       ?>         
 
-      <div class="input-field col s12">
-
-        <label><b>Ders Kodu</b></label>
-        <br>
-        <select class="browser-default" id="Derskodu"  type="text" placeholder="Ders Kodu" name="Derskodu">
-          <option value="" disabled selected>Choose your option</option>
-          <?php
-          while($row = $result->fetch_assoc()) 
-          {
-            ?>
-            <option value="<?php echo $row['course_code']; ?>"><?php echo $row['course_code']; ?></option>
-            <?php
-          }
+      <label>Ders Kodu</label>
+      <select class="browser-default" id="Derskodu"  type="text" placeholder="Ders Kodu" name="Derskodu">
+        <option disabled selected>Choose your option</option>
+        <?php
+        while($row = $result->fetch_assoc()) 
+        {
           ?>
-        </select>
-        
-      </div>
-
-      <div class="input-field col s12">
-        <label><b>Ders Sınıfı</b></label>
-        <br>
-        <select class="browser-default" id="Derssınıfı" type="text" placeholder="Ders Sınıfı" name="Derssınıfı">
-          <option value="" disabled selected>Choose your option</option>
+          <option value="<?php echo $row['course_code']; ?>"><?php echo $row['course_code']; ?></option>
           <?php
-          while($row = $result1->fetch_assoc()) 
-          {
-            ?>
-            <option value="<?php echo $row['room_name']; ?>"><?php echo $row['room_name']; ?></option>
-            <?php
-          }
+        }
+        ?>
+      </select>
+
+      <br>
+
+      <label><b>Ders Sınıfı</b></label>
+      <select class="browser-default" id="Derssınıfı" type="text" placeholder="Ders Sınıfı" name="Derssınıfı">
+        <option disabled selected>Choose your option</option>
+        <?php
+        while($row = $result1->fetch_assoc()) 
+        {
           ?>
-        </select>
-        
-      </div>
+          <option value="<?php echo $row['room_name']; ?>"><?php echo $row['room_name']; ?></option>
+          <?php
+        }
+        ?>
+      </select>
       <br>
 
 
     </div>
+    <div style="text-align:center">
+      <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="modalkyt" onclick="kaydet()">Kaydet</a>
+    </div>
     
-    <table>
-      <tr>
-        <td style="text-align:center">
-          <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="modalkyt" onClick="kaydet()">Kaydet</a>
-        </td>
-      </tr>
-    </table>
 
   </div>
 
@@ -104,14 +96,16 @@ $userRow=$query->fetch_array();
   <!-- Nav Bar -->
   <nav>
     <div style="background-color:#ef7f2d" class="nav-wrapper">
-      <a class="brand-logo"><img height="64" src="img/navbarlogo.png"></a>
+      <a class="brand-logo"><img height="66" src="img/navbarlogo.png"></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="profhome2.php">&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
+        <li><a href="studenthome2.php">&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
         <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
       </ul>
     </div>
   </nav>
+
   <br>
+
   <table class="striped">
     <thead>
       <tr>
@@ -209,14 +203,9 @@ $userRow=$query->fetch_array();
     </tr>
   </tbody>
 </table>
-<table>
-  <tr>
-    <td style="text-align:center">
-      <a style="background-color:#ef7f2d; text-aling:center" class="waves-effect waves-light btn" id="gonder" href="studenthome2.php">Gönder</a>
-    </td>
-  </tr>
-</table>
-
+<div style="text-align:center">
+  <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="gonder" href="studenthome2.php">Gönder</a>
+</div>
 <div style="display: none;" id="sonuc"></div>
 <script>
 function myFunction(x) {

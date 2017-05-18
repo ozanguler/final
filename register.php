@@ -75,10 +75,10 @@ if(isset($_POST['btn-signup'])) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Where is My Professor</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-<link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 
@@ -126,18 +126,10 @@ if(isset($_POST['btn-signup'])) {
 				<hr />
 
 				<div class="form-group">
-					<table>
-						<tr>
-							<td style="text-align:left">
-								<button style="background-color:#ef7f2d" type="submit" class="btn btn-default" name="btn-signup">
-									<span class="glyphicon glyphicon-log-in"></span> &nbsp; Activate Now
-								</button> 
-							</td>
-							<td style="text-align:right">
-								<a style="background-color:#ef7f2d" href="index.php" class="btn btn-default" style="float:right;">Login Here</a>
-							</td>
-						</tr>
-					</table>
+					<button type="submit" class="btn btn-default" name="btn-signup">
+						<span class="glyphicon glyphicon-log-in"></span> &nbsp; Activate Now
+					</button> 
+					<a href="index.php" class="btn btn-default" style="float:right;">Login Here</a>
 				</div> 
 
 			</form>

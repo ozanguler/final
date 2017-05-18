@@ -5,7 +5,7 @@ include_once 'dbconnect.php';
 $deletesql = "DELETE FROM prof_schedule WHERE prof_eko_id=".$_SESSION['userSession'];
 
 if ($DBcon->query($deletesql) === TRUE) {
-    // echo "Record deleted successfully";
+  echo "Record deleted successfully";
 } else {
   echo "Error deleting record: " . $DBcon->error;
 }
@@ -34,7 +34,8 @@ $userRow=$query->fetch_array();
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" style="padding-top: 65px;">
+
     <span class="close">&times;</span>
 
     <form action="#">
@@ -48,23 +49,20 @@ $userRow=$query->fetch_array();
       </p>
     </form>
 
+
     <div id="lecturepanel">
 
-     <?php 
-     $lectures = "SELECT course_code, course_name FROM courses";
-     $result = $DBcon->query($lectures);
+      <?php 
+      $lectures = "SELECT course_code, course_name FROM courses";
+      $result = $DBcon->query($lectures);
 
-     $rooms = "SELECT room_name FROM room_number";
-     $result1 = $DBcon->query($rooms);
-     ?>         
+      $rooms = "SELECT room_name FROM room_number";
+      $result1 = $DBcon->query($rooms);
+      ?>         
 
-     <br>
-     <div class="input-field col s12">
-
-      <label><b>Ders Kodu</b></label>
-      <br>
+      <label>Ders Kodu</label>
       <select class="browser-default" id="Derskodu"  type="text" placeholder="Ders Kodu" name="Derskodu">
-        <option value="" disabled selected>Choose your option</option>
+        <option disabled selected>Choose your option</option>
         <?php
         while($row = $result->fetch_assoc()) 
         {
@@ -75,13 +73,11 @@ $userRow=$query->fetch_array();
         ?>
       </select>
 
-    </div>
-
-    <div class="input-field col s12">
-      <label><b>Ders Sınıfı</b></label>
       <br>
+
+      <label>Ders Sınıfı</label>
       <select class="browser-default" id="Derssınıfı" type="text" placeholder="Ders Sınıfı" name="Derssınıfı">
-        <option value="" disabled selected>Choose your option</option>
+        <option disabled selected>Choose your option</option>
         <?php
         while($row = $result1->fetch_assoc()) 
         {
@@ -91,22 +87,13 @@ $userRow=$query->fetch_array();
         }
         ?>
       </select>
+      <br>
+
 
     </div>
-    <br>
-
+    <button id="modalkyt" onclick="kaydet()" style="height: 40px">kaydet</button>
 
   </div>
-
-  <table>
-    <tr>
-      <td style="text-align:center">
-        <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="modalkyt" onClick="kaydet()">Kaydet</a>
-      </td>
-    </tr>
-  </table>
-
-</div>
 
 </div>
 
@@ -116,14 +103,16 @@ $userRow=$query->fetch_array();
   <!-- Nav Bar -->
   <nav>
     <div style="background-color:#ef7f2d" class="nav-wrapper">
-      <a class="brand-logo"><img height="64" src="img/navbarlogo.png"></a>
+      <a class="brand-logo"><img height="66" src="img/navbarlogo.png"></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="profhome2.php">&nbsp; <?php echo $userRow['first_name']. " " .$userRow['last_name']; ?></a></li>
         <li><a href="logout.php?logout"><i class="material-icons">power_settings_new</i></a></li>
       </ul>
     </div>
   </nav>
+
   <br>
+
   <table class="striped">
     <thead>
       <tr>
@@ -221,11 +210,10 @@ $userRow=$query->fetch_array();
     </tr>
   </tbody>
 </table>
-
 <table>
   <tr>
     <td style="text-align:center">
-      <a style="background-color:#ef7f2d; text-aling:center" class="waves-effect waves-light btn" id="gonder" href="profhome2.php">Gönder</a>
+      <a style="background-color:#ef7f2d" class="waves-effect waves-light btn" id="gonder" href="profhome2.php">Gönder</a>
     </td>
   </tr>
 </table>
@@ -266,17 +254,14 @@ schudule_type[0].onclick=function(){
   lecturepanel.style.display="none";
   modalkyt.onclick=function(){
 
-
-
   //var modal = document.getElementById('myModal');
    //var derskodu =document.getElementById('Derskodu').value;
    // var derssınıfı = document.getElementById('Derssınıfı').value;
-   var room_no="A 100";
-
-   document.getElementById(x).value ="office hour!"+room_no;
-   document.getElementById(x).innerHTML ="office hour"+"<br>"+room_no;
+   document.getElementById(x).value ="office hour!";
+   document.getElementById(x).innerHTML ="Office Hour";
 
    modal.style.display = "none";
+
  }
 
 }
